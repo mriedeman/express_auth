@@ -36,16 +36,25 @@ const sessionStore = new MongoStore({
 
 app.use(session({
     secret: 'some secret',
+    //what does the session do if nothing is changed
     resave: false,
     saveUninitialized: true,
     store: sessionStore,
+    //setting expiration
     cookie: {
         maxAge: 1000*60*60*24 //Equals 1 day expiration
     }
 }));
 
 app.get('/', (req, res, next) => {
-    res.send('<h1>Sessions Tutorial</h1>')
+    console.log(req.session);
+
+    if (req.session.viewCount) {
+        req.session.viewCount++;
+    }else {
+        req.session.viewCount = 1;
+    }
+    res.send(`<h1>Sessions Tutorial: You have visited this page ${req.session.viewCount} times</h1>`)
 });
 
 app.get('/jacob', (req, res, next) => {
