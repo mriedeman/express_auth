@@ -10,6 +10,8 @@ const isAdmin = require('./authMiddleware').isAdmin;
  * -------------- POST ROUTES ----------------
  */
 
+ //passport.authenticate middleware intercepts the username and password submitted in the post login request
+ //and validates them in its verifyCallback function
  router.post('/login', passport.authenticate('local', { failureRedirect: '/login-failure', successRedirect: 'login-success' }));
 
  router.post('/register', (req, res, next) => {

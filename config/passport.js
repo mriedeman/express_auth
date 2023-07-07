@@ -34,6 +34,7 @@ const strategy  = new LocalStrategy(customFields, verifyCallback);
 
 passport.use(strategy);
 
+//has to do with express session, put the userid in the session, when we want user in session we grab user from db with sessionid
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });

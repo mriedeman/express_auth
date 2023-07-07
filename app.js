@@ -46,6 +46,7 @@ app.use(session({
 // Need to require the entire Passport config module so app.js knows about it
 require('./config/passport');
 
+//reinitializes passport middlware when routes are loaded so it doesn't become stale
 app.use(passport.initialize());
 app.use(passport.session());
 
